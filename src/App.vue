@@ -1,18 +1,30 @@
 <script>
+import AppSearchbar from "./components/AppSearchbar.vue";
 import { store } from "./store.js";
+import axios from "axios";
 
 export default {
-  components: {},
+  components: { AppSearchbar },
   data() {
     return {
       store,
     };
   },
-  methods: {},
+  methods: {
+    search() {
+      console.log(this.store.searchText);
+
+      axios.get().then();
+    },
+  },
 };
 </script>
 
-<template></template>
+<template>
+  <div class="wrapper">
+    <AppSearchbar @search="search()" />
+  </div>
+</template>
 
 <style lang="scss">
 @import "@fortawesome/fontawesome-free/css/all.css";
