@@ -5,14 +5,14 @@ export default {
   data() {
     return {
       store,
-      emit: ["search"],
+      emit: ["find"],
     };
   },
 };
 </script>
 
 <template>
-  <label for="search">Cerca un film</label>
-  <input v-model="store.searchText" id="search" type="text" />
-  <button @click="$emit('search')">Cerca</button>
+  <label for="searchbar">Cerca un film</label>
+  <input v-model="store.searchText" id="searchbar" type="text" />
+  <button @click="$emit('find')">Cerca</button>
 </template>
