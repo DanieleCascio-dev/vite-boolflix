@@ -1,4 +1,16 @@
-<script setup></script>
+<script>
+import { store } from "./store.js";
+
+export default {
+  components: {},
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {},
+};
+</script>
 
 <template></template>
 
