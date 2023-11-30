@@ -18,12 +18,21 @@ export default {
     getImageUrl(language) {
       return new URL(`../assets/img/${language}.png`, import.meta.url).href;
     },
+
+    cover(path) {
+      return `https://image.tmdb.org/t/p/w342${path}`
+        ? `https://image.tmdb.org/t/p/w342${path}`
+        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIEvVMBuJZmvpp5GKIwABcfZw9YF_969WdwJS-cPWuV4hyJcz1l1P1sLufyE9GyRjLC4s&usqp=CAU";
+    },
   },
 };
 </script>
 
 <template>
   <div class="card">
+    <div class="cover">
+      <img :src="cover(movie.poster_path)" alt="" />
+    </div>
     <h3>Titolo: {{ movie.title ? movie.title : movie.name }}</h3>
     <h4>Titolo originale: {{ movie.original_title }}</h4>
 
@@ -39,4 +48,10 @@ export default {
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.flag {
+  img {
+    width: 50px;
+  }
+}
+</style>

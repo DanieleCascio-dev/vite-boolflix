@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       store,
-      emit: ["find"],
+      emits: ["find"],
     };
   },
 };
@@ -13,6 +13,11 @@ export default {
 
 <template>
   <label for="searchbar">Cerca un film</label>
-  <input v-model="store.searchText" id="searchbar" type="text" />
+  <input
+    @keyup.enter="$emit('find')"
+    v-model="store.searchText"
+    id="searchbar"
+    type="text"
+  />
   <button @click="$emit('find')">Cerca</button>
 </template>

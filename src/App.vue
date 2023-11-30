@@ -13,7 +13,7 @@ export default {
     };
   },
   methods: {
-    find() {
+    search() {
       console.log(this.store.searchText);
 
       axios
@@ -48,7 +48,7 @@ export default {
 
 <template>
   <div class="wrapper">
-    <AppSearchbar @find="find()" />
+    <AppSearchbar @find="search()" />
     <!-- Film -->
     <ul>
       <li v-for="film in store.films" :key="film.title">
@@ -67,8 +67,4 @@ export default {
 
 <style lang="scss">
 @import "@fortawesome/fontawesome-free/css/all.css";
-
-img {
-  width: 50px;
-}
 </style>
