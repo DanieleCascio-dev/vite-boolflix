@@ -5,9 +5,9 @@ export default {
   data() {
     return {
       store,
-      emits: ["find"],
     };
   },
+  emits: ["find"],
 };
 </script>
 
