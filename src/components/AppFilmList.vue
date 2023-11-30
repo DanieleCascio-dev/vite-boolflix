@@ -43,13 +43,19 @@ export default {
 
 <template>
   <div class="card">
+    <!-- COVER -->
     <div class="cover">
       <img :src="cover(movie.poster_path)" alt="" />
     </div>
+    <!-- /COVER -->
+
+    <!-- INFO -->
     <h3>Titolo: {{ movie.title ? movie.title : movie.name }}</h3>
     <h4>Titolo originale: {{ movie.original_title }}</h4>
     <p class="plot">Overview: {{ movie.overview }}</p>
+    <!-- /INFO -->
 
+    <!-- FLAG -->
     <div class="flag">
       <img
         :src="getImageUrl(movie.original_language)"
@@ -58,6 +64,9 @@ export default {
       />
       <span v-else>{{ movie.original_language }}</span>
     </div>
+    <!-- /FLAG -->
+
+    <!-- RATINGS -->
     <small
       >Voto {{ votes(movie.vote_average) }}
       <span v-for="star in ratingStar" :key="ratingStar.length"
@@ -67,6 +76,7 @@ export default {
         ><i class="fa-regular fa-star"></i
       ></span>
     </small>
+    <!-- RATINGS -->
   </div>
 </template>
 

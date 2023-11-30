@@ -12,10 +12,10 @@ export default {
       store,
     };
   },
+
   methods: {
     search() {
       // console.log(this.store.searchText);
-
       axios
         .get(this.store.apiStartMovie, {
           params: {
@@ -47,24 +47,47 @@ export default {
 </script>
 
 <template>
+  <!-- Wrapper -->
   <div class="wrapper">
     <AppSearchbar @find="search()" />
-    <!-- Film -->
-    <ul>
-      <li v-for="film in store.films" :key="film.title">
-        <AppFilmList :movie="film" />
-      </li>
-    </ul>
-    <hr />
-    <!-- Series -->
-    <ul>
-      <li v-for="serie in store.series" :key="serie.name">
-        <AppFilmList :movie="serie" />
-      </li>
-    </ul>
+
+    <!-- Results -->
+    <div class="results">
+      <!-- Film -->
+      <ul>
+        <li v-for="film in store.films" :key="film.title">
+          <AppFilmList :movie="film" />
+        </li>
+      </ul>
+      <!-- /Film -->
+
+      <hr />
+
+      <!-- Series -->
+      <ul>
+        <li v-for="serie in store.series" :key="serie.name">
+          <AppFilmList :movie="serie" />
+        </li>
+      </ul>
+      <!-- /Series -->
+    </div>
+    <!-- Results -->
   </div>
+  <!-- /Wrapper -->
 </template>
 
 <style lang="scss">
 @import "@fortawesome/fontawesome-free/css/all.css";
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .results {
+    margin-top: 80px;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+  }
+}
 </style>
