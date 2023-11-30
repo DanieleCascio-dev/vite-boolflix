@@ -15,8 +15,14 @@ export default {
           "https://www.countryflags.com/wp-content/uploads/spain-flag-png-large.png",
         italy:
           "https://www.countryflags.com/wp-content/uploads/italy-flag-png-large.png",
+        japan:
+          "https://www.countryflags.com/wp-content/uploads/japan-flag-png-large.png",
+        portugal:
+          "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
+        france:
+          "https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png",
+        korea: "https://cdn.countryflags.com/thumbs/south-korea/flag-800.png",
       },
-      showFlag: true,
     };
   },
   methods: {
@@ -51,12 +57,21 @@ export default {
     },
     flagFinder(language) {
       let flag = "";
-      if (language === "es") {
+      console.log(language);
+      if (language == "es") {
         return (flag = this.flag.spain);
-      } else if (language === "it") {
+      } else if (language == "it") {
         return (flag = this.flag.italy);
-      } else if (language === "en") {
+      } else if (language == "en") {
         return (flag = this.flag.uk);
+      } else if (language == "ja") {
+        return (flag = this.flag.japan);
+      } else if (language == "fr") {
+        return (flag = this.flag.france);
+      } else if (language == "ko") {
+        return (flag = this.flag.korea);
+      } else if (language == "pt") {
+        return (flag = this.flag.portugal);
       }
     },
   },
@@ -68,16 +83,12 @@ export default {
     <AppSearchbar @find="find()" />
     <div class="film-list">
       <ul>
-        <li v-for="film in store.films">
+        <li v-for="film in store.films" :key="film.title">
           <h3>Titolo: {{ film.title }}</h3>
           <h4>Titolo originale: {{ film.original_title }}</h4>
 
           <div class="flag">
-            <img
-              v-show="showFlag"
-              :src="flagFinder(film.original_language)"
-              alt=""
-            />
+            <img :src="flagFinder(film.original_language)" alt="" />
             <span>{{ film.original_language }}</span>
           </div>
           <small>Voto {{ film.vote_average }}</small>
@@ -90,11 +101,7 @@ export default {
         <li v-for="serie in store.series">
           <h2>{{ serie.name }}</h2>
           <div class="flag">
-            <img
-              v-show="showFlag"
-              :src="flagFinder(serie.original_language)"
-              alt=""
-            />
+            <img :src="flagFinder(serie.original_language)" alt="" />
             <span>{{ serie.original_language }}</span>
           </div>
         </li>
