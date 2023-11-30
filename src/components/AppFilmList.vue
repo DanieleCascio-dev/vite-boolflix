@@ -6,6 +6,9 @@ export default {
     return {
       store,
       flag: ["en", "it"],
+      stars: ["x", "x", "x", "x", "x"],
+      ratingStar: [],
+      voidStar: [],
     };
   },
   props: { movie: Object },
@@ -23,6 +26,15 @@ export default {
       return `https://image.tmdb.org/t/p/w342${path}`
         ? `https://image.tmdb.org/t/p/w342${path}`
         : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIEvVMBuJZmvpp5GKIwABcfZw9YF_969WdwJS-cPWuV4hyJcz1l1P1sLufyE9GyRjLC4s&usqp=CAU";
+    },
+
+    votes(vote) {
+      let stars = parseInt((vote * 5) / 10);
+      this.voidStar = this.stars.slice(0, 5 - stars);
+      this.ratingStar = this.stars.slice(0, stars);
+      // console.log(stars);
+      // console.log(this.ratingStar);
+      // console.log(this.voidStar);
     },
   },
 };
@@ -44,7 +56,13 @@ export default {
       />
       <span v-else>{{ movie.original_language }}</span>
     </div>
-    <small>Voto {{ movie.vote_average }}</small>
+    <small
+      >Voto {{ votes(movie.vote_average) }}
+      <span v-for="star in ratingStar"><i class="fa-solid fa-star"></i></span>
+      <span v-for="blankStar in voidStar"
+        ><i class="fa-regular fa-star"></i
+      ></span>
+    </small>
   </div>
 </template>
 
