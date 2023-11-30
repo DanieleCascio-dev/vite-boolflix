@@ -54,7 +54,7 @@ export default {
     <!-- Results -->
     <div class="results">
       <!-- Film -->
-      <ul>
+      <ul class="films">
         <li v-for="film in store.films" :key="film.title">
           <AppFilmList :movie="film" />
         </li>
@@ -64,7 +64,7 @@ export default {
       <hr />
 
       <!-- Series -->
-      <ul>
+      <ul class="series">
         <li v-for="serie in store.series" :key="serie.name">
           <AppFilmList :movie="serie" />
         </li>
@@ -78,16 +78,30 @@ export default {
 
 <style lang="scss">
 @import "@fortawesome/fontawesome-free/css/all.css";
+body {
+  margin: 0;
+}
 
 .wrapper {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   position: relative;
 
   .results {
-    margin-top: 80px;
+    /* margin-top: 80px; */
     height: calc(100% - 80px);
     overflow-y: auto;
+    padding: 0 2rem;
+
+    .series,
+    .films {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      overflow-x: auto;
+      list-style: none;
+      gap: 1rem;
+    }
   }
 }
 </style>
