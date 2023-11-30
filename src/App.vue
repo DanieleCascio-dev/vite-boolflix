@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     search() {
-      console.log(this.store.searchText);
+      // console.log(this.store.searchText);
 
       axios
         .get(this.store.apiStartMovie, {
@@ -24,9 +24,9 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp.data.results);
+          // console.log(resp.data.results);
           this.store.films = resp.data.results;
-          console.log(this.store.films);
+          // console.log(this.store.films);
         });
 
       axios
@@ -37,9 +37,9 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp.data.results);
+          // console.log(resp.data.results);
           this.store.series = resp.data.results;
-          console.log(this.store.series);
+          // console.log(this.store.series);
         });
     },
   },

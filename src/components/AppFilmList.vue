@@ -29,9 +29,10 @@ export default {
     },
 
     votes(vote) {
-      let stars = parseInt((vote * 5) / 10);
-      this.voidStar = this.stars.slice(0, 5 - stars);
-      this.ratingStar = this.stars.slice(0, stars);
+      let starsInt = parseInt((vote * 5) / 10);
+      let maxStarsMin = 5 - starsInt;
+      this.voidStar = this.stars.slice(0, maxStarsMin);
+      this.ratingStar = this.stars.slice(0, starsInt);
       // console.log(stars);
       // console.log(this.ratingStar);
       // console.log(this.voidStar);
@@ -47,6 +48,7 @@ export default {
     </div>
     <h3>Titolo: {{ movie.title ? movie.title : movie.name }}</h3>
     <h4>Titolo originale: {{ movie.original_title }}</h4>
+    <p class="plot">Overview: {{ movie.overview }}</p>
 
     <div class="flag">
       <img
@@ -58,8 +60,10 @@ export default {
     </div>
     <small
       >Voto {{ votes(movie.vote_average) }}
-      <span v-for="star in ratingStar"><i class="fa-solid fa-star"></i></span>
-      <span v-for="blankStar in voidStar"
+      <span v-for="star in ratingStar" :key="ratingStar.length"
+        ><i class="fa-solid fa-star"></i
+      ></span>
+      <span v-for="blankStar in voidStar" :key="voidStar.length"
         ><i class="fa-regular fa-star"></i
       ></span>
     </small>
