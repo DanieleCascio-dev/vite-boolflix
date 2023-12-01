@@ -90,15 +90,20 @@ body {
   .results {
     /* margin-top: 80px; */
     height: calc(100% - 80px);
-    overflow-y: auto;
-    padding: 0 2rem;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+    /* overflow-y: auto; */
+    overflow-x: auto;
+    margin: 0 2rem;
 
     .series,
     .films {
       display: flex;
       align-items: stretch;
-      justify-content: center;
-      overflow-x: auto;
+
+      overflow-x: scroll;
       list-style: none;
       gap: 1rem;
     }

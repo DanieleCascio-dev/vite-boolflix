@@ -13,7 +13,9 @@ export default {
 
 <template>
   <nav>
-    <div class="logo">Logo</div>
+    <div class="logo">
+      <img src="../assets/img/netflix.png" alt="" />
+    </div>
     <div class="bar">
       <label for="searchbar">Cerca un film</label>
       <input
@@ -36,7 +38,7 @@ nav {
 
   width: 100%;
   height: 80px;
-  background-color: rgba(128, 128, 128, 0.11);
+  background-color: #141414;
 
   display: flex;
   justify-content: space-between;
@@ -44,6 +46,7 @@ nav {
 
   .logo {
     margin-left: 3rem;
+    max-height: 80px;
   }
 
   .bar {

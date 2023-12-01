@@ -18,24 +18,19 @@ export default {
         return this.language;
       }
     },
-    getImageUrl(language) {
-      return new URL(`../assets/img/${language}.png`, import.meta.url).href;
+    getImageUrl(imageNAme) {
+      return new URL(`../assets/img/${imageNAme}.png`, import.meta.url).href;
     },
 
     cover(path) {
-      return `https://image.tmdb.org/t/p/w342${path}`
+      return path
         ? `https://image.tmdb.org/t/p/w342${path}`
-        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIEvVMBuJZmvpp5GKIwABcfZw9YF_969WdwJS-cPWuV4hyJcz1l1P1sLufyE9GyRjLC4s&usqp=CAU";
+        : this.getImageUrl("no_image_2");
     },
-
-    votes(vote) {
-      let starsInt = parseInt((vote * 5) / 10);
-      let maxStarsMin = 5 - starsInt;
-      this.voidStar = this.stars.slice(0, maxStarsMin);
-      this.ratingStar = this.stars.slice(0, starsInt);
-      // console.log(stars);
-      // console.log(this.ratingStar);
-      // console.log(this.voidStar);
+  },
+  computed: {
+    vote() {
+      math.ceil(movie.vote_average);
     },
   },
 };
@@ -68,11 +63,11 @@ export default {
 
     <!-- RATINGS -->
     <small
-      >Voto {{ votes(movie.vote_average) }}
-      <span v-for="star in ratingStar" :key="ratingStar.length"
+      >Voto
+      <span v-for="num in vote" :key="ratingStar.length"
         ><i class="fa-solid fa-star"></i
       ></span>
-      <span v-for="blankStar in voidStar" :key="voidStar.length"
+      <span v-for="num in 5 - vote" :key="voidStar.length"
         ><i class="fa-regular fa-star"></i
       ></span>
     </small>
