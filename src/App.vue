@@ -61,8 +61,8 @@ export default {
       <!-- Film -->
       <h2 class="title">Film</h2>
       <ul class="films">
-        <li v-for="film in store.films" :key="film.title">
-          <AppFilmList :movie="film" />
+        <li v-for="(film, index) in store.films" :key="film.title">
+          <AppFilmList :movie="film" :movieIndex="index" />
         </li>
       </ul>
       <!-- /Film -->
