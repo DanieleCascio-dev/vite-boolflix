@@ -17,7 +17,6 @@ export default {
       <img src="../assets/img/netflix.png" alt="" />
     </div>
     <div class="bar">
-      <label for="searchbar">Cerca un film</label>
       <input
         @keyup.enter="$emit('find')"
         v-model="store.searchText"
@@ -38,7 +37,7 @@ nav {
 
   width: 100%;
   height: 80px;
-  background-color: #141414;
+  background-color: #101010;
 
   display: flex;
   justify-content: space-between;
@@ -47,6 +46,10 @@ nav {
   .logo {
     margin-left: 3rem;
     max-height: 80px;
+
+    img {
+      width: 120px;
+    }
   }
 
   .bar {

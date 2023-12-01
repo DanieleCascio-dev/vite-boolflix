@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     vote() {
-      math.ceil(movie.vote_average);
+      return Math.ceil(this.movie.vote_average / 2);
     },
   },
 };
@@ -64,18 +64,20 @@ export default {
     <!-- RATINGS -->
     <small
       >Voto
-      <span v-for="num in vote" :key="ratingStar.length"
-        ><i class="fa-solid fa-star"></i
-      ></span>
-      <span v-for="num in 5 - vote" :key="voidStar.length"
-        ><i class="fa-regular fa-star"></i
-      ></span>
+      <span v-for="num in vote"><i class="fa-solid fa-star"></i></span>
+      <span v-for="num in 5 - vote"><i class="fa-regular fa-star"></i></span>
     </small>
     <!-- RATINGS -->
   </div>
 </template>
 
 <style scoped lang="scss">
+.card {
+  .cover {
+    min-height: 513px;
+  }
+}
+
 .flag {
   img {
     width: 50px;

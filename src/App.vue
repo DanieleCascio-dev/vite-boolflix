@@ -10,6 +10,7 @@ export default {
   data() {
     return {
       store,
+      showResult: false,
     };
   },
 
@@ -41,6 +42,8 @@ export default {
           this.store.series = resp.data.results;
           // console.log(this.store.series);
         });
+
+      this.showResult = true;
     },
   },
 };
@@ -52,7 +55,7 @@ export default {
     <AppSearchbar @find="search()" />
 
     <!-- Results -->
-    <div class="results">
+    <div class="results" v-show="showResult">
       <!-- Film -->
       <ul class="films">
         <li v-for="film in store.films" :key="film.title">
@@ -86,26 +89,33 @@ body {
   height: 100vh;
   width: 100%;
   position: relative;
+  background-color: lighten(#101010, 30%);
 
   .results {
-    /* margin-top: 80px; */
     height: calc(100% - 80px);
     /* display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column; */
-    /* overflow-y: auto; */
-    overflow-x: auto;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     margin: 0 2rem;
+    margin-right: 0;
 
     .series,
     .films {
       display: flex;
       align-items: stretch;
-
-      overflow-x: scroll;
       list-style: none;
       gap: 1rem;
+
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }
