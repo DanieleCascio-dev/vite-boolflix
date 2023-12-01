@@ -63,7 +63,7 @@ export default {
 <template>
   <div class="card">
     <!-- COVER -->
-    <div class="cover" ">
+    <div class="cover">
       <img :src="cover(movie.poster_path)" alt="" />
     </div>
     <!-- /COVER -->
