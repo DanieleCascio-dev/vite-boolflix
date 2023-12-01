@@ -29,15 +29,12 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use "../style/partials/variables" as *;
+@use "../style/partials/mixin" as *;
 nav {
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99; */
-
   width: 100%;
   height: 80px;
-  background-color: #101010;
+  background-color: $secondary-color;
 
   display: flex;
   justify-content: space-between;
@@ -56,6 +53,23 @@ nav {
     margin-right: 3rem;
     display: flex;
     gap: 0.5rem;
+
+    input {
+      border-radius: 40px;
+      border: 2px solid $primary-color;
+    }
+
+    button {
+      background-color: lighten($secondary-color, 25%);
+      color: lighten($primary-color, 10%);
+      font-weight: bolder;
+      border-radius: 40px;
+      box-shadow: none;
+
+      &:hover {
+        background-color: lighten($secondary-color, 35%);
+      }
+    }
   }
 }
 </style>

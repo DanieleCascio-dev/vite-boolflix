@@ -57,6 +57,7 @@ export default {
     <!-- Results -->
     <div class="results" v-show="showResult">
       <!-- Film -->
+      <h2 class="title">Film</h2>
       <ul class="films">
         <li v-for="film in store.films" :key="film.title">
           <AppFilmList :movie="film" />
@@ -67,6 +68,7 @@ export default {
       <hr />
 
       <!-- Series -->
+      <h2 class="title">Series</h2>
       <ul class="series">
         <li v-for="serie in store.series" :key="serie.name">
           <AppFilmList :movie="serie" />
@@ -81,6 +83,8 @@ export default {
 
 <style lang="scss">
 @import "@fortawesome/fontawesome-free/css/all.css";
+@use "../style/partials/variables" as *;
+@use "../style/partials/mixin" as *;
 body {
   margin: 0;
 }
@@ -89,7 +93,11 @@ body {
   height: 100vh;
   width: 100%;
   position: relative;
-  background-color: lighten(#101010, 30%);
+  background-color: lighten($secondary-color-color, 15%);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .results {
     height: calc(100% - 80px);
@@ -97,24 +105,31 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column; */
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-      display: none;
-    }
 
     margin: 0 2rem;
     margin-right: 0;
+
+    .title {
+      margin: 2rem;
+      color: lighten($primary-color, 10%);
+      text-transform: uppercase;
+    }
 
     .series,
     .films {
       display: flex;
       align-items: stretch;
+      flex-wrap: wrap;
       list-style: none;
       gap: 1rem;
 
       overflow-x: auto;
       &::-webkit-scrollbar {
         display: none;
+
+        li {
+          width: calc(100% / 5);
+        }
       }
     }
   }

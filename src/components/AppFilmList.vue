@@ -69,11 +69,13 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use "../style/partials/mixin" as *;
+@use "../style/partials/variables" as *;
 .card {
   position: relative;
 
   &:hover > .cover {
-    filter: opacity(0);
+    filter: opacity(30%);
   }
 
   &:hover > .info {
@@ -87,6 +89,7 @@ export default {
     align-items: stretch;
     justify-content: center;
     filter: opacity(100%);
+    transition: all 0.5s;
   }
 
   .info {
@@ -94,7 +97,7 @@ export default {
     top: 0;
     left: 0;
 
-    background-color: lighten(#101010, 10%);
+    background-color: lighten(#10101063, 10%);
     color: white;
     max-height: 100%;
     min-height: 100%;
@@ -102,10 +105,11 @@ export default {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     filter: opacity(0);
     overflow-y: auto;
+    transition: all 0.5s;
   }
 }
 .flag {
