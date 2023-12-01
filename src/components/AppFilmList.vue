@@ -6,9 +6,7 @@ export default {
     return {
       store,
       flag: ["en", "it"],
-      stars: ["x", "x", "x", "x", "x"],
-      ratingStar: [],
-      voidStar: [],
+      hover: false,
     };
   },
   props: { movie: Object },
@@ -27,6 +25,9 @@ export default {
         ? `https://image.tmdb.org/t/p/w342${path}`
         : this.getImageUrl("no_image_2");
     },
+    mockUp() {
+      this.hover = !this.hover;
+    },
   },
   computed: {
     vote() {
@@ -39,45 +40,79 @@ export default {
 <template>
   <div class="card">
     <!-- COVER -->
-    <div class="cover">
+    <div
+      class="cover"
+      @click="mockUp"
+      @mouseover="hover = true"
+      @mouseleave="hover = false"
+    >
       <img :src="cover(movie.poster_path)" alt="" />
     </div>
     <!-- /COVER -->
 
     <!-- INFO -->
-    <h3>Titolo: {{ movie.title ? movie.title : movie.name }}</h3>
-    <h4>Titolo originale: {{ movie.original_title }}</h4>
-    <p class="plot">Overview: {{ movie.overview }}</p>
-    <!-- /INFO -->
-
-    <!-- FLAG -->
-    <div class="flag">
-      <img
-        :src="getImageUrl(movie.original_language)"
-        alt=""
-        v-if="flag.includes(movie.original_language)"
-      />
-      <span v-else>{{ movie.original_language }}</span>
+    <div class="info">
+      <h3>Titolo: {{ movie.title ? movie.title : movie.name }}</h3>
+      <h4>Titolo originale: {{ movie.original_title }}</h4>
+      <p class="plot">Overview: {{ movie.overview }}</p>
+      <!-- FLAG -->
+      <div class="flag">
+        <img
+          :src="getImageUrl(movie.original_language)"
+          alt=""
+          v-if="flag.includes(movie.original_language)"
+        />
+        <span v-else>{{ movie.original_language }}</span>
+      </div>
+      <!-- /FLAG -->
+      <!-- RATINGS -->
+      <small
+        >Voto
+        <span v-for="num in vote"><i class="fa-solid fa-star"></i></span>
+        <span v-for="num in 5 - vote"><i class="fa-regular fa-star"></i></span>
+      </small>
+      <!-- RATINGS -->
     </div>
-    <!-- /FLAG -->
-
-    <!-- RATINGS -->
-    <small
-      >Voto
-      <span v-for="num in vote"><i class="fa-solid fa-star"></i></span>
-      <span v-for="num in 5 - vote"><i class="fa-regular fa-star"></i></span>
-    </small>
-    <!-- RATINGS -->
+    <!-- /INFO -->
   </div>
 </template>
 
 <style scoped lang="scss">
 .card {
+  position: relative;
+
+  &:hover > .cover {
+    filter: opacity(0);
+  }
+
+  &:hover > .info {
+    filter: opacity(100%);
+  }
+
   .cover {
     min-height: 513px;
+    min-width: 342px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: opacity(100%);
+  }
+
+  .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: lighten(#101010, 40%);
+    color: white;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    filter: opacity(0);
   }
 }
-
 .flag {
   img {
     width: 50px;
