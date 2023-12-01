@@ -23,7 +23,9 @@ export default {
         id="searchbar"
         type="text"
       />
-      <button @click="$emit('find')">Cerca</button>
+      <div @click="$emit('find')">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
     </div>
   </nav>
 </template>
@@ -57,14 +59,15 @@ nav {
     input {
       border-radius: 40px;
       border: 2px solid $primary-color;
+      padding: 5px;
     }
 
-    button {
+    div {
       background-color: lighten($secondary-color, 25%);
       color: lighten($primary-color, 10%);
       font-weight: bolder;
-      border-radius: 40px;
-      box-shadow: none;
+      border-radius: 50%;
+      padding: 10px;
 
       &:hover {
         background-color: lighten($secondary-color, 35%);
