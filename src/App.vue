@@ -7,11 +7,36 @@ import AppFilmList from "./components/AppFilmList.vue";
 
 export default {
   components: { AppSearchbar, AppFilmList },
+
   data() {
     return {
       store,
       showResult: false,
+      moreView: true,
     };
+  },
+
+  created() {
+    axios
+      .get(`https://api.themoviedb.org/3/trending/movie/week`, {
+        params: {
+          api_key: this.store.apiKey,
+        },
+      })
+      .then((resp) => {
+        this.store.films = resp.data.results;
+      });
+    axios
+      .get(`https://api.themoviedb.org/3/trending/tv/week`, {
+        params: {
+          api_key: this.store.apiKey,
+        },
+      })
+      .then((resp) => {
+        this.store.series = resp.data.results;
+      });
+
+    this.showResult = true;
   },
 
   methods: {
@@ -44,6 +69,7 @@ export default {
         });
 
       this.showResult = true;
+      this.moreView = false;
     },
 
     cast() {},
@@ -59,7 +85,9 @@ export default {
     <!-- Results -->
     <div class="results" v-show="showResult">
       <!-- Film -->
-      <h2 class="title">Film</h2>
+      <h2 class="title">
+        Film <span v-show="moreView">più visti questa settimana</span>
+      </h2>
       <ul class="films">
         <li v-for="(film, index) in store.films" :key="film.title">
           <AppFilmList :movie="film" :movieIndex="index" />
@@ -70,7 +98,9 @@ export default {
       <hr />
 
       <!-- Series -->
-      <h2 class="title">Series</h2>
+      <h2 class="title">
+        Serie <span v-show="moreView">più viste questa settimana</span>
+      </h2>
       <ul class="series">
         <li v-for="serie in store.series" :key="serie.name">
           <AppFilmList :movie="serie" />

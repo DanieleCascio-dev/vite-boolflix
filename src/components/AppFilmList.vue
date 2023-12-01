@@ -90,7 +90,7 @@ export default {
         <span v-for="num in 5 - vote"><i class="fa-regular fa-star"></i></span>
       </small>
       <p @click="cast(movieIndex)">Cast</p>
-      <ul v-show="showCast">
+      <ul class="cast-list" v-show="showCast">
         <li v-for="actor in store.cast">{{ actor.name }}</li>
       </ul>
       <!-- RATINGS -->
@@ -138,9 +138,19 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    gap: 0.5rem;
     filter: opacity(0);
     overflow-y: auto;
     transition: all 0.5s;
+
+    .cast-list {
+      list-style: none;
+      padding: 1rem;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
   }
 }
 .flag {
