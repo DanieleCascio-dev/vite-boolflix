@@ -27,7 +27,7 @@ export default {
         .then((resp) => {
           // console.log(resp.data.results);
           this.store.films = resp.data.results;
-          // console.log(this.store.films);
+          console.log(this.store.films);
         });
 
       axios
@@ -40,11 +40,13 @@ export default {
         .then((resp) => {
           // console.log(resp.data.results);
           this.store.series = resp.data.results;
-          // console.log(this.store.series);
+          console.log(this.store.series);
         });
 
       this.showResult = true;
     },
+
+    cast() {},
   },
 };
 </script>
@@ -82,9 +84,10 @@ export default {
 </template>
 
 <style lang="scss">
+@use "./style/general.scss";
+@use "./style/partials/variables" as *;
+@use "./style/partials/mixin" as *;
 @import "@fortawesome/fontawesome-free/css/all.css";
-@use "../style/partials/variables" as *;
-@use "../style/partials/mixin" as *;
 body {
   margin: 0;
 }
@@ -93,7 +96,7 @@ body {
   height: 100vh;
   width: 100%;
   position: relative;
-  background-color: lighten($secondary-color-color, 15%);
+  background-color: lighten($secondary-color, 15%);
   overflow-y: auto;
   &::-webkit-scrollbar {
     display: none;

@@ -1,11 +1,13 @@
 <script>
 import { store } from "../store";
+import axios from "axios";
 
 export default {
   data() {
     return {
       store,
       flag: ["en", "it"],
+      showCast: false,
     };
   },
   props: { movie: Object },
@@ -23,6 +25,24 @@ export default {
       return path
         ? `https://image.tmdb.org/t/p/w342${path}`
         : this.getImageUrl("no_image_2");
+    },
+    cast() {
+      this.showCast = false;
+      this.store.cast = [];
+
+      axios
+        .get(`${this.store.apiCast}${this.movie.id}/credits`, {
+          params: {
+            api_key: this.store.apiKey,
+          },
+        })
+        .then((resp) => {
+          console.log(resp);
+          this.store.cast = resp.data.cast.slice(0, 5);
+          console.log(this.store.cast);
+        });
+
+      this.showCast = !this.showCast;
     },
   },
   computed: {
@@ -62,6 +82,10 @@ export default {
         <span v-for="num in vote"><i class="fa-solid fa-star"></i></span>
         <span v-for="num in 5 - vote"><i class="fa-regular fa-star"></i></span>
       </small>
+      <p @click="cast()">Cast</p>
+      <ul v-show="showCast">
+        <li v-for="actor in store.cast">{{ actor.name }}</li>
+      </ul>
       <!-- RATINGS -->
     </div>
     <!-- /INFO -->
