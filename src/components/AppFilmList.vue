@@ -6,7 +6,6 @@ export default {
     return {
       store,
       flag: ["en", "it"],
-      hover: false,
     };
   },
   props: { movie: Object },
@@ -25,9 +24,6 @@ export default {
         ? `https://image.tmdb.org/t/p/w342${path}`
         : this.getImageUrl("no_image_2");
     },
-    mockUp() {
-      this.hover = !this.hover;
-    },
   },
   computed: {
     vote() {
@@ -40,12 +36,7 @@ export default {
 <template>
   <div class="card">
     <!-- COVER -->
-    <div
-      class="cover"
-      @click="mockUp"
-      @mouseover="hover = true"
-      @mouseleave="hover = false"
-    >
+    <div class="cover">
       <img :src="cover(movie.poster_path)" alt="" />
     </div>
     <!-- /COVER -->
@@ -62,7 +53,7 @@ export default {
           alt=""
           v-if="flag.includes(movie.original_language)"
         />
-        <span v-else>{{ movie.original_language }}</span>
+        <p v-else>{{ movie.original_language }}</p>
       </div>
       <!-- /FLAG -->
       <!-- RATINGS -->
@@ -93,7 +84,7 @@ export default {
     min-height: 513px;
     min-width: 342px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     filter: opacity(100%);
   }
@@ -102,15 +93,19 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
-    background-color: lighten(#101010, 40%);
+
+    background-color: lighten(#101010, 10%);
     color: white;
-    height: 100%;
-    width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    padding: 1rem;
+
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     filter: opacity(0);
+    overflow-y: auto;
   }
 }
 .flag {
